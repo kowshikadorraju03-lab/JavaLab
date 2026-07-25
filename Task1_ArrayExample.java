@@ -1,14 +1,35 @@
 package lab1;
 
-public class Task1_ArrayExample {
+import java.util.Scanner;
+
+@FunctionalInterface
+interface LastDigit {
+    int getLastDigit(int n);
+}
+
+public class Task10_LastDigitSum {
+
+    public static int lastDigit(int n) {
+        return Math.abs(n % 10);
+    }
+
     public static void main(String[] args) {
 
-        int[] numbers = {10, 20, 30, 40, 50};
+        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Array Elements:");
+        System.out.print("Enter first number: ");
+        int num1 = sc.nextInt();
 
-        for (int i = 0; i < numbers.length; i++) {
-            System.out.println(numbers[i]);
-        }
+        System.out.print("Enter second number: ");
+        int num2 = sc.nextInt();
+
+        // Method Reference
+        LastDigit ld = Task10_LastDigitSum::lastDigit;
+
+        int sum = ld.getLastDigit(num1) + ld.getLastDigit(num2);
+
+        System.out.println("Sum of last digits = " + sum);
+
+        sc.close();
     }
 }
