@@ -1,26 +1,40 @@
 package lab1;
 
-public class Task8_FibonacciNumber {
+import java.util.Scanner;
+
+@FunctionalInterface
+interface Fibonacci {
+    int find(int n);
+}
+
+public class Task8_Fibonacci {
 
     public static void main(String[] args) {
 
-        int n = 10;
-        int first = 0;
-        int second = 1;
-        int next = 0;
+        Scanner sc = new Scanner(System.in);
 
-        if (n == 1) {
-            System.out.println("The " + n + "st Fibonacci number is: " + first);
-        } else if (n == 2) {
-            System.out.println("The " + n + "nd Fibonacci number is: " + second);
-        } else {
-            for (int i = 3; i <= n; i++) {
-                next = first + second;
-                first = second;
-                second = next;
+        System.out.print("Enter N: ");
+        int n = sc.nextInt();
+
+        Fibonacci fib = (num) -> {
+            if (num == 0)
+                return 0;
+            if (num == 1)
+                return 1;
+
+            int a = 0, b = 1;
+
+            for (int i = 2; i <= num; i++) {
+                int c = a + b;
+                a = b;
+                b = c;
             }
 
-            System.out.println("The " + n + "th Fibonacci number is: " + next);
-        }
+            return b;
+        };
+
+        System.out.println("Fibonacci = " + fib.find(n));
+
+        sc.close();
     }
 }
